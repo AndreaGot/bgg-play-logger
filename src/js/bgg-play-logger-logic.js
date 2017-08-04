@@ -17,10 +17,14 @@ $(document).ready(
 						event.preventDefault();
 						if (counter <= MAX_PLAYERS) {
 							$('#playersTable tr:last').after(
-									"<tr> " + "<td>Player " + counter + "</td>" + "<td><input type='text' name='players[" + counter + "][name]' value=''></td>" + "<td><input type='text' name='players[" + counter + "][username]' value=''></td>"
-											+ "<td><input type='text' name='players[" + counter + "][score]' value=''></td>" + "<td><input type='checkbox' name='players[" + counter + "][win]' id='players[" + counter
-											+ "][win]' value=1 ><label for='players[" + counter + "][win]'>Win</label></td>" + "<td><input type='checkbox' name='players[" + counter + "][new]' id='players[" + counter
-											+ "][new]' value=1 ><label for='players[" + counter + "][new]'>New</label></td>" + "</tr> ");
+									"<tr> "
+										+" <td>Player " + counter + "</td>"
+										+" <td><input type='text' class='form-control' name='players[" + counter + "][name]' value='' placeholder='Name'></td>"
+										+" <td><input type='text' class='form-control' name='players[" + counter + "][username]' value=''></td>"
+										+" <td><input type='text' class='form-control' name='players[" + counter + "][score]' value=''></td>"
+										+" <td><input type='checkbox' class='form-control' name='players[" + counter + "][win]' id='players[" + counter + "][win]' value=1>"
+										+" <td><input type='checkbox' class='form-control' name='players[" + counter + "][new]' id='players[" + counter + "][new]' value=1>"
+										+ "</tr> ");
 							counter++;
 						} else {
 							alert("You cannot insert more than 6 players")
