@@ -1,5 +1,5 @@
 var MAX_PLAYERS = 6;
-var ADD_PLAYER_ID = 3;
+var ADD_PLAYER_ID = 2;
 
 $(document).ready(
 		function() {
@@ -27,40 +27,39 @@ $(document).ready(
 						}
 
 					});
+			
+			jQuery('#bgg-form').submit(
+				function() {
+				    var n = $("#game-search").val().split(" ");
+				    var gameId = n[n.length - 1];
+				    alert(gameId);
+					$("#game-search").val(gameId);
+				}	
+			);
+
 			$("#game-search").easyAutocomplete(options);
 		});
-
-function getGamesOnBGG(searchString) {
-	searchString = searchString.split(' ').join('+');
-	alert(searchString);
-	jQuery.ajax({
-		type : "get",
-		url : "https://www.boardgamegeek.com/xmlapi2/search?query=" + searchString + "&type=boardgame",
-		success : function(data) {
-			
-			return $.xml2json(data);
-		},
-		error : function() {
-			console.log('error', arguments);
-		}
-	});
-}
 
 var options = {
 
 	url : function(phrase) {
-		return getGamesOnBGG(phrase);
+		phrase = phrase.split(' ').join('+');
+		return "https://www.boardgamegeek.com/xmlapi2/search?query=" + phrase + "&type=boardgame";
 	},
 
-	getValue : "name",
+	dataType : "xml",
+	xmlElementName : "item",
+
+	getValue : function(element) {
+		return $(element).find("name").attr('value') + ' (' + $(element).find("yearpublished").attr('value') + ') - ' + $(element).attr('id');
+	},
 
 	list : {
 		match : {
 			enabled : true
 		}
-	},
+	}, 
 	
-	requestDelay: 500,
-
-	theme : "round"
+	requestDelay: 1000
+	
 };
