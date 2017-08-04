@@ -16,6 +16,20 @@
 
 </head>
 <body>
+	<div class="jumbotron">
+		<h1>Hi, board game player!</h1>
+		<p>This is a play logger for BoardGameGeek, that allows you to log your favourite game plays!</p>
+		<p>
+			<a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+		</p>
+	</div>
+
+	<div class="page-header">
+		<h1>
+			BGG Play Logger <small>Save your plays on BGG!</small>
+		</h1>
+	</div>
+
 	<div id="data-entry">
 		<form action='http://www.boardgamegeek.com/geekplay.php' class='form-horizontal' method='post' id="bgg-form">
 
@@ -23,34 +37,53 @@
 			<input type='hidden' name='action' value='save'> <input type='hidden' name='version' id='quickplay_version' value='2'> <input type='hidden' name='objecttype' id='quickplay_objecttype' value='thing'> <input type='hidden'
 				name='playid' id='quickplay_playid' value=''> <input type='hidden' name='action' id='quickplay_action' value='save'>
 			<!-- END HIDDEN INPUTS SECTION -->
-			<label for="playDate" class="control-label">Date:</label> <input type="date" class="form-control" id="playDate"> <br> <label for="quantity" class="control-label">Number</label> <input type='number' class="form-control" id="quantity"
-				name='quantity' value='1'> <br> <label for="location" class="control-label">Location</label> <input type='text' class="form-control" id="location" name='location' value='Home'> <br> <label for="game-search"
-				class="control-label">Game</label> <input class="form-control" id="game-search" name="objectid" />
+			<div class="panel panel-default">
+				<div class="panel-heading">Game data</div>
+				<div class="panel-body">
+					<label for="playDate" class="control-label">Date:</label> <input type="date" class="form-control" id="playDate" name="playdate"> 
+					<br> <label for="quantity" class="control-label">Number</label> <input type='number' class="form-control"
+						id="quantity" name='quantity' value='1'> 
+						<br> <label for="location" class="control-label">Location</label> <input type='text' class="form-control" id="location" name='location' value='Home'> 
+						<br> <label for="game-search" class="control-label">Game</label> <input class="form-control" id="game-search" name="objectid" />
+						<br> <label for="game-search" class="control-label">Duration</label> <input class="form-control" id="duration" name="length" />
+				</div>
+			</div>
 
-			<table id="playersTable">
-				<thead>
-					<th class="td-med">Player</th>
-					<th class="td-max">Name</th>
-					<th class="td-med">Username</th>
-					<th class="td-med">Score</th>
-					<th class="td-med">Win</th>
-					<th class="td-med">New</th>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Player 1</td>
-						<td><input type='text' class="form-control" name='players[1][name]' value='' placeholder="Name"></td>
-						<td><input type='text' class="form-control" name='players[1][username]' value=''></td>
-						<td><input type='text' class="form-control" name='players[1][score]' value=''></td>
-						<td><input type='checkbox' class="form-control" name='players[1][win]' id='players[1][win]' value=1>
-						<td><input type='checkbox' class="form-control" name='players[1][new]' id='players[1][new]' value=1>
-					</tr>
-				</tbody>
-			</table>
+			<div class="panel panel-default">
+				<div class="panel-heading">Player data</div>
+				<div class="panel-body">
+					<table id="playersTable">
+						<thead>
+							<th class="td-med">Player</th>
+							<th class="td-max">Name</th>
+							<th class="td-med">Username</th>
+							<th class="td-med">Score</th>
+							<th class="td-med">Win</th>
+							<th class="td-med">New</th>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Player 1</td>
+								<td><input type='text' class='form-control' name='players[1][name]' value='' placeholder="Name"></td>
+								<td><input type='text' class='form-control' name='players[1][username]' value=''></td>
+								<td><input type='text' class='form-control' name='players[1][score]' value=''></td>
+								<td><input type='checkbox' class='form-control' name='players[1][win]' id='players[1][win]' value=1>
+								<td><input type='checkbox' class='form-control' name='players[1][new]' id='players[1][new]' value=1>
+							</tr>
+						</tbody>
+					</table>
+					<button type="button" class="btn btn-warning" id="addPlayerButton">Add Player</button>
+				</div>
+			</div>
 
-			<input type="textarea" name="comments" class="form-control" placeholder="Insert a comment about this play.." />
+			<div class="panel panel-default">
+				<div class="panel-heading">Any comments?</div>
+				<div class="panel-body">
+					<input type="textarea" name="comments" class="form-control" placeholder="Insert a comment about this play.." />
+				</div>
+			</div>
+
 			<button type="reset" class="btn btn-reset">Reset</button>
-			<button type="button" class="btn btn-warning" id="addPlayerButton">Add Player</button>
 			<button class="btn btn-primary " name='B1'>Submit</button>
 		</form>
 	</div>
