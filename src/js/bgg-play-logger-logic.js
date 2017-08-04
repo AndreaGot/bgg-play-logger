@@ -7,7 +7,7 @@ $(document).ready(
 			var counter = ADD_PLAYER_ID;
 			var date = new Date();
 			var year = date.getFullYear();
-			var month = date.getMonth()<10 ? ('0'+(date.getMonth() + 1)):(date.getMonth() + 1);
+			var month = date.getMonth() < 10 ? ('0' + (date.getMonth() + 1)) : (date.getMonth() + 1);
 			var day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
 			$('#playDate').val(year + '-' + month + '-' + day);
 
@@ -27,5 +27,40 @@ $(document).ready(
 						}
 
 					});
-
+			$("#game-search").easyAutocomplete(options);
 		});
+
+function getGamesOnBGG(searchString) {
+	searchString = searchString.split(' ').join('+');
+	alert(searchString);
+	jQuery.ajax({
+		type : "get",
+		url : "https://www.boardgamegeek.com/xmlapi2/search?query=" + searchString + "&type=boardgame",
+		success : function(data) {
+			
+			return $.xml2json(data);
+		},
+		error : function() {
+			console.log('error', arguments);
+		}
+	});
+}
+
+var options = {
+
+	url : function(phrase) {
+		return getGamesOnBGG(phrase);
+	},
+
+	getValue : "name",
+
+	list : {
+		match : {
+			enabled : true
+		}
+	},
+	
+	requestDelay: 500,
+
+	theme : "round"
+};
